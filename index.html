@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title> اضحية العيد المبارك</title>
-  <style>
+ <style>
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     direction: rtl;
@@ -13,6 +13,7 @@
     align-items: center;
     height: 100vh;
     margin: 0;
+    padding: 10px;
   }
 
   form {
@@ -21,6 +22,7 @@
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     width: 420px;
+    max-width: 100%;
     transition: all 0.3s ease-in-out;
   }
 
@@ -33,6 +35,7 @@
     text-align: center;
     color: #00796b;
     margin-bottom: 20px;
+    font-size: 20px;
   }
 
   input, select {
@@ -75,7 +78,30 @@
     text-align: center;
     font-size: 14px;
   }
+
+  /* 🌐 تنسيق خاص بالشاشات الصغيرة (الهواتف) */
+  @media (max-width: 480px) {
+    form {
+      padding: 20px;
+      width: 100%;
+      box-shadow: none;
+      border-radius: 15px;
+    }
+
+    h3 {
+      font-size: 18px;
+    }
+
+    input, select, button {
+      font-size: 14px;
+    }
+
+    .message {
+      font-size: 13px;
+    }
+  }
 </style>
+
 
 </head>
 <body>
