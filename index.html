@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title> اضحية العيد المبارك</title>
+  <style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    direction: rtl;
+    background: linear-gradient(to left, #e0f7fa, #fff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  form {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    width: 420px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  form:hover {
+    transform: scale(1.01);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  h3 {
+    text-align: center;
+    color: #00796b;
+    margin-bottom: 20px;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    transition: border 0.3s;
+    font-size: 15px;
+  }
+
+  input:focus, select:focus {
+    border-color: #26a69a;
+    outline: none;
+    background-color: #f1fefc;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(to right, #26a69a, #00796b);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background: linear-gradient(to right, #00796b, #004d40);
+  }
+
+  .message {
+    margin-top: 15px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 14px;
+  }
+</style>
+
+</head>
+<body>
+
+<form id="registerForm">
+  <h3>التسجيل في قائمة اقتناء اضحية العيد المبارك</h3>
+  <input type="text" id="firstName" placeholder="الاسم" required>
+  <input type="text" id="lastName" placeholder="اللقب" required>
+  <input type="text" id="nationalId" placeholder="رقم التعريف الوطني" required>
+  <select id="commune" required>
+    <option value="">اختر بلدية الاقامة</option>
+    <option value="اولاد دراج">اولاد دراج</option>
+    <option value="اولاد عدي لقبالة">اولاد عدي لقبالة</option>
+    <option value="عين الخضراء">عين الخضراء</option>
+    <option value="المعاضيد">المعاضيد</option>
+    <option value="برهوم">برهوم</option>
+  </select>
+  <button type="submit">تسجيل</button>
+  <div class="message" id="message"></div>
+</form>
+
+<script>
+  document.getElementById("registerForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const nationalId = document.getElementById("nationalId").value.trim();
+    const commune = document.getElementById("commune").value;
+    const message = document.getElementById("message");
+
+    if (!firstName || !lastName || !nationalId || !commune) {
+      message.textContent = "يرجى ملء جميع الحقول.";
+      message.style.color = "red";
+      return;
+    }
+
+    // تحميل قائمة البلدية من localStorage
+    let listKey = "list_" + commune;
+    let list = JSON.parse(localStorage.getItem(listKey)) || [];
+
+    // تحقق من الرقم الوطني إذا كان موجودًا مسبقًا
+    if (list.some(entry => entry.nationalId === nationalId)) {
+      message.textContent = "أنت مسجل مسبقًا!";
+      message.style.color = "red";
+      return;
+    }
+
+    // إضافة البيانات للقائمة
+    list.push({ firstName, lastName, nationalId });
+    localStorage.setItem(listKey, JSON.stringify(list));
+
+    message.textContent = "تم التسجيل بنجاح!";
+    message.style.color = "green";
+    document.getElementById("registerForm").reset();
+  });
+</script>
+
+</body>
+</html>
