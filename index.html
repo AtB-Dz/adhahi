@@ -101,6 +101,17 @@
       font-size: 13px;
     }
   }
+  footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: transparent;
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  padding: 10px 0;
+}
+
 </style>
 
 
@@ -123,7 +134,9 @@
   <button type="submit">تسجيل</button>
   <div class="message" id="message"></div>
 </form>
-
+ <footer>
+    <p>هذا الموقع تجريبي غير رسمي صُمّم بواسطة أحمد توفيق بوراس</p>
+  </footer>
 <script>
   document.getElementById("registerForm").addEventListener("submit", function(e) {
     e.preventDefault();
